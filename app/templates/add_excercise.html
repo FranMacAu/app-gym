@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+{%  with messages = get_flashed_messages() %}     <!--asigna mensaje flash a una variable-->
+{% if messages %}                               <!-- comprueba que messages exista (true) -->
+{% for message in messages %}                   <!-- inicia loop -->
+    <div class="alert alert-light alerta-cambios" role="alert">
+     <p>{{message}}<button type="button"  class="btn-dark position-absolute end-0 top-0 " data-bs-dismiss="alert" aria-label="Close">X</button></p>                              <!-- imprime el mensaje (uno a la vez)-->
+    
+    </div>
+{% endfor %}                                    <!-- cierre bucle, condicional y with -->
+{% endif %}
+{% endwith %}
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="card card-body bg-secondary mb-3">
+            <h5 class="card-title">Agregar ejercicio nuevo</h5>
+            <form action="/add_excercise" method='POST'>    <!--  action manda lo recolectado a la ruta entre comillas cuando se oprima guardar  --> 
+                                                            <!--  método POST es para datos de cliente a servidor, GET es lo opuesto  -->
+            <input type="text" name="fullname" placeholder="Nombre completo">       
+            <input type="text" name="principal_muscle" placeholder="Músculo principal">
+            <input type="text" name="secondary_muscle" placeholder="Músculo secundario">
+            <button type="submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-7">
+            <table class="table table-primary table-striped ">
+                <thead>                                     <!-- Títulos -->
+                    <tr>                                    <!-- fila -->
+                        <td>Ejercicio</td>
+                        <td>Músculo principal</td>          <!-- Columnas -->
+                        <td>Músculo secundario</td>
+                        <td>Operations</td>
+                    </tr>
+                </thead>
+                <tbody>                                     <!-- cuerpo (relleno/celdas) -->
+                    {% for ex in excercises %}
+                    <tr>
+                        <td>{{ex.1}}</td>
+                        <td>{{ex.2}}</td>
+                        <td>{{ex.3}}</td>
+                        <td>
+                            <a href="/edit/{{ex.0}}" class="btn btn-warning">Edit</a>       <!-- link "personalizado" para que el serv sepa qué valor modificar/borrar -->
+                            <a href="/delete/{{ex.0}}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

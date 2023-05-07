@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form action="/update/{{ excercise.0 }}" method='POST'>
+
+<input type="text" name="fullname" placeholder="Nombre completo" value="{{ excercise.1 }}">       
+<input type="text" name="principal_muscle" placeholder="Músculo principal" value="{{ excercise.2 }}">
+<input type="text" name="secondary_muscle" placeholder="Músculo secundario" value="{{ excercise.3 }}">
+<button type="submit">
+Guardar
+</button>
+
+</form>
+{% endblock %}

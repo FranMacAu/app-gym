@@ -1,0 +1,14 @@
+.barra-superior{
+    height: 150px;
+    border-bottom: 1px !important;
+    border-color: white !important;
+    border-radius: 5px !important;
+}
+
+.alerta-cambios{
+    width: 50%;
+    height: 5%;
+    position: absolute;
+    text-align: center;
+
+}
